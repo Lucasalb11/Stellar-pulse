@@ -1,16 +1,23 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
   fetchReflectorPrices,
+  ReflectorNotConfiguredError,
   resetReflectorReader,
   setReflectorReader,
 } from "@/lib/stellar/prices/reflector";
 
 const ORIGINAL_XLM = process.env.REFLECTOR_XLM_USD_CONTRACT;
 const ORIGINAL_USDC = process.env.REFLECTOR_USDC_USD_CONTRACT;
+const ORIGINAL_DISABLE = process.env.STELLAR_PULSE_DISABLE_REFLECTOR;
 
 afterEach(() => {
   process.env.REFLECTOR_XLM_USD_CONTRACT = ORIGINAL_XLM;
   process.env.REFLECTOR_USDC_USD_CONTRACT = ORIGINAL_USDC;
+  if (ORIGINAL_DISABLE === undefined) {
+    delete process.env.STELLAR_PULSE_DISABLE_REFLECTOR;
+  } else {
+    process.env.STELLAR_PULSE_DISABLE_REFLECTOR = ORIGINAL_DISABLE;
+  }
   resetReflectorReader();
 });
 
@@ -38,10 +45,13 @@ describe("fetchReflectorPrices", () => {
     expect(calls).toContain("CUSDCCONTRACTID");
   });
 
-  it("default reader throws so unwired environments fail loudly, not silently", async () => {
+  it("when STELLAR_PULSE_DISABLE_REFLECTOR=1, the default reader throws a typed error so the fallback chain skips Reflector cleanly", async () => {
     process.env.REFLECTOR_XLM_USD_CONTRACT = "CXLMCONTRACTID";
     process.env.REFLECTOR_USDC_USD_CONTRACT = "CUSDCCONTRACTID";
+    process.env.STELLAR_PULSE_DISABLE_REFLECTOR = "1";
     resetReflectorReader();
-    await expect(fetchReflectorPrices()).rejects.toThrow(/reader is not wired/);
+    await expect(fetchReflectorPrices()).rejects.toBeInstanceOf(
+      ReflectorNotConfiguredError,
+    );
   });
 });

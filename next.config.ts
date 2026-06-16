@@ -19,6 +19,15 @@ const nextConfig: NextConfig = {
       expire: 86_400,
     },
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "icons.llamao.fi",
+        pathname: "/icons/protocols/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

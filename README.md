@@ -2,18 +2,20 @@
 
 # Stellar Pulse
 
-**The provenance-first analytics layer for the Stellar economy.**
+**The real-time monitoring layer of the Stellar economy.**
 
 TVL · stablecoins · capital flows · RWAs · Soroban activity · a 0–100 trust score — every number badged with its upstream source, every adapter validated by Zod, every failure logged.
 
-[![Tests](https://img.shields.io/badge/tests-190%2F190-success)]()
+### [stellar-pulse.vercel.app](https://stellar-pulse.vercel.app)
+
+[![Live demo](https://img.shields.io/badge/demo-stellar--pulse.vercel.app-7D00FF)](https://stellar-pulse.vercel.app)
+[![Tests](https://img.shields.io/badge/tests-192%2F192-success)]()
 [![Build](https://img.shields.io/badge/build-passing-success)]()
 [![Security check](https://img.shields.io/badge/security--check-0%20issues-success)]()
 [![Next.js](https://img.shields.io/badge/Next.js-16.2.9-black)]()
 [![React](https://img.shields.io/badge/React-19.2.4-61dafb)]()
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6)]()
-[![Stellar](https://img.shields.io/badge/Stellar-Mainnet-7D00FF)](https://stellar.org)
-[![Soroban](https://img.shields.io/badge/Soroban-RPC-7D00FF)](https://soroban.stellar.org)
+[![Stellar SDK](https://img.shields.io/badge/Stellar%20SDK-16.0.0-7D00FF)](https://github.com/stellar/js-stellar-sdk)
+[![Reflector oracle](https://img.shields.io/badge/Reflector-wired-7D00FF)](https://reflector.network)
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 
 </div>
@@ -38,7 +40,7 @@ Stellar Pulse is a **server-rendered, open-source analytics dashboard** that uni
 
 > **Every number is either verified live data, badged with its source — or marked Illustrative. There is no silent mock data anywhere in the UI.**
 
-Eight pages cover TVL by protocol, stablecoin supply (USDC / EURC / USDT bridged), capital-flow Sankey, tokenized real-world assets (BENJI, WTGXX, ...), Soroban contract activity, layered XLM/USDC price oracle, and a proprietary 0–100 trust score over the top 12 protocols.
+Nine routes (one landing + eight dashboards) cover TVL by protocol, stablecoin supply (USDC / EURC / USDT bridged), capital-flow Sankey, tokenized real-world assets (BENJI, WTGXX, ...), Soroban contract activity, a layered XLM/USDC price oracle, and a proprietary 0–100 trust score over the top 12 protocols.
 
 ## Why it matters for the Stellar ecosystem
 
@@ -70,7 +72,8 @@ Eight pages cover TVL by protocol, stablecoin supply (USDC / EURC / USDT bridged
 
 | | |
 |---|---|
-| Live demo | _Deployed after SCF review_ — `npm run dev` for local |
+| Live demo | **[stellar-pulse.vercel.app](https://stellar-pulse.vercel.app)** |
+| Source | [github.com/Lucasalb11/Stellar-pulse](https://github.com/Lucasalb11/Stellar-pulse) |
 | Architecture spec | [`docs/data-architecture.md`](docs/data-architecture.md) |
 | Security playbook | [`SECURITY.md`](SECURITY.md) |
 | Ship plan & retros | [`docs/ship-plan.md`](docs/ship-plan.md) |
@@ -85,7 +88,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). **No API keys required** for v1 — every upstream is a free public endpoint.
+Open [http://localhost:3000](http://localhost:3000). **No API keys required** at v0.1 — every upstream is a free public endpoint.
 
 Optional env vars (see [`docs/getting-started/configuration`](docs/getting-started/configuration.md)):
 
@@ -152,15 +155,33 @@ Stellar Pulse is **not a generic blockchain dashboard.** Its core data comes fro
 
 | Capability | How it uses Stellar specifically |
 |---|---|
+| **Reflector oracle** | Reads `lastprice` from the Reflector Soroban contract `CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M` via `@stellar/stellar-sdk` + `rpc.Server.simulateTransaction`. Scales raw price by the contract's on-chain `decimals()` (cached). Sits **second** in the layered XLM/USDC oracle chain — when CoinGecko fails, Reflector takes over. |
 | **Stablecoin supply** | Reads `balances.authorized + liquidity_pools_amount + contracts_amount + claimable_balances_amount` from Horizon `/assets` — fields that only exist because Stellar tracks issued-asset balances natively. |
 | **RWA tracking** | Issuers are keyed by Stellar `G…` account IDs. Categories (Treasuries / Funds / Bonds / Private Credit) reflect Stellar's strength as the RWA chain. |
 | **Capital-flow Sankey** | Aggregates Horizon `/payments`. Sankey nodes are real Stellar accounts from a `directory.ts` map of known entities (Circle USDC, Allbridge, ...). |
 | **Soroban contracts** | Top contracts come from `stellar.expert /explorer/public/contract`. Activity score blends `invocations + subinvocation + payments + events` because the public unauthenticated endpoint doesn't pre-sort. |
-| **Soroban RPC** | Drives the Reflector oracle path in the price chain. |
+| **Soroban RPC** | Public mainnet endpoint at `soroban-rpc.mainnet.stellar.gateway.fm` powers the Reflector reader. |
 | **Asset registry** | Keyed by `{code, issuer}` tuple — the **only** correct way to identify a Stellar asset (issuer disambiguates collision-prone codes like USDT). |
-| **Protocol-link registry** | Zod-validated outbound links to Soroswap, Blend, Aquarius, Phoenix, StellarX, Lumen Bridge — every link `rel="noopener noreferrer"`, `https`-only, no `javascript:` / `data:`. |
+| **Protocol-link registry** | **22 verified Stellar protocols** with HTTPS-only homepages, audit citations, logos (DefiLlama icon CDN), and DefiLlama-slug aliases. Every outbound link rendered with `rel="noopener noreferrer"`, never `javascript:` / `data:`. |
 
-The application reads only **public mainnet endpoints** owned by the Stellar Foundation (Horizon, Soroban RPC), the community (stellar.expert), and aggregators (DefiLlama, CoinGecko). No private API keys are required to evaluate it.
+The application reads only **public mainnet endpoints** owned by the Stellar Foundation (Horizon, Soroban RPC), the community (stellar.expert, Reflector), and aggregators (DefiLlama, CoinGecko). No private API keys are required to evaluate it.
+
+### Live Reflector integration
+
+```ts
+// lib/stellar/prices/reflector-sdk.ts (excerpt)
+const server = new rpc.Server(SOROBAN_RPC_URL);
+const contract = new Contract(REFLECTOR_MAINNET_EXTERNAL_CEX_DEX_CONTRACT);
+const tx = new TransactionBuilder(sourceAccount, { fee: "100", networkPassphrase: Networks.PUBLIC })
+  .addOperation(contract.call("lastprice", buildAssetScVal("XLM")))
+  .setTimeout(30)
+  .build();
+const sim = await server.simulateTransaction(tx);
+const { price, timestamp } = scValToNative(sim.result.retval);
+return Number(price) / (10 ** decimals);
+```
+
+Set `REFLECTOR_XLM_USD_CONTRACT` / `REFLECTOR_USDC_USD_CONTRACT` env vars to opt into the live oracle in production. Disable with `STELLAR_PULSE_DISABLE_REFLECTOR=1` for an air-gapped run.
 
 ## Pulse Score methodology
 
@@ -228,7 +249,7 @@ Every host listed above also appears in `EXTERNAL_HOSTS` (`lib/stellar/env.ts`).
   - CSP `connect-src` ⊇ `EXTERNAL_HOSTS`.
   - `process.env.REVALIDATE_SECRET` is only read inside `lib/stellar/env.ts`.
 
-At v0.1: **190/190 tests green**, **security-check 0 issues**, **`SECURITY.md` §6 pre-deploy checklist** signed off in the changelog.
+At v0.1: **192/192 tests green**, **security-check 0 issues**, **`SECURITY.md` §6 pre-deploy checklist** signed off in the changelog.
 
 ## Roadmap
 
@@ -236,21 +257,23 @@ At v0.1: **190/190 tests green**, **security-check 0 issues**, **`SECURITY.md` �
 
 - 9 routes live on public endpoints (no keys required to evaluate).
 - 7 Stellar / DeFi sources with Zod-validated adapters.
+- **Reflector oracle wired** via `@stellar/stellar-sdk` 16.0.0 + Soroban RPC `simulateTransaction`.
+- 22-entry protocol-link registry (DefiLlama-slug aliases, logos via DefiLlama icon CDN, audit citations).
 - `withFallback` observability across every adapter.
 - Hardened `POST /api/revalidate` + `GET /api/health/sources`.
 - CSP / HSTS / X-Frame headers in `proxy.ts`.
-- Asset registry keyed by `{code, issuer}`, protocol-link registry, RWA issuer registry.
+- Asset registry keyed by `{code, issuer}`, RWA issuer registry.
 - Pulse Score v1 computed from live DefiLlama inputs.
-- 190 tests · 0 security-check issues · `SECURITY.md` §6 dry-run signed off.
+- 192 tests · 0 security-check issues · `SECURITY.md` §6 dry-run signed off.
 
-### v0.2 — next quarter
+### v0.2 — next
 
-- Wire **Reflector** Soroban-SDK reader (today a stub that throws — chain falls back to orderbook).
 - Promote **stellar.expert authenticated** endpoint for proper contract ranking (today the public endpoint reports null `invocations` for most contracts).
 - Confirm RWA placeholder issuer keys (`BENJI`, `WTGXX`, Etherfuse) against on-chain issuance.
 - Expand Sankey directory with CEX deposit accounts, Soroswap router, Blend pool factory.
 - Per-protocol historical TVL series → real differentiation in `tvlStability`.
 - Horizon `top-holders` → real `concentration` factor.
+- Set Reflector contract IDs (`REFLECTOR_XLM_USD_CONTRACT`, `REFLECTOR_USDC_USD_CONTRACT`) in prod env.
 
 ### v1 — community feedback dependent
 
@@ -258,7 +281,7 @@ At v0.1: **190/190 tests green**, **security-check 0 issues**, **`SECURITY.md` �
 - Webhooks for protocols to be notified of score changes.
 - Historical snapshots / time-travel.
 - Per-asset deep pages (trustlines, payment volume, holder distribution).
-- Optional Vercel Postgres / Marketplace DB for snapshot history.
+- Optional Vercel Marketplace DB for snapshot history.
 
 ## Project layout
 
@@ -293,7 +316,7 @@ stellarPulse/
 │   ├── ui/                    # KPI, Badge, SourceBadge, chart wrappers
 │   ├── dashboard/             # Topbar, charts, Sankey, layout
 │   └── landing/               # Hero, nav, network background
-├── tests/                     # vitest specs (mirrors lib/ — 190 tests, 23 files)
+├── tests/                     # vitest specs (mirrors lib/ — 192 tests, 23 files)
 ├── scripts/security-check.ts  # Static security guard (CI gate)
 ├── proxy.ts                   # Routing middleware (CSP + HSTS + headers)
 ├── docs/                      # Docusaurus-structured documentation (29 pages)
@@ -307,7 +330,7 @@ stellarPulse/
 | `npm run dev` | Next dev server on `:3000` (Turbopack) |
 | `npm run build` | Production build |
 | `npm run start` | Serve production build |
-| `npm test` | Full vitest suite (190 tests across 23 files) |
+| `npm test` | Full vitest suite (192 tests across 23 files) |
 | `npm run test:watch` | Vitest watch mode |
 | `npm run test:coverage` | v8 coverage report |
 | `npm run security-check` | Static security guard over `lib/`, `app/`, `components/`, `scripts/` |

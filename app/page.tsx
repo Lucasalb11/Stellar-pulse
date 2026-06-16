@@ -5,7 +5,11 @@ import { LandingNav } from "@/components/landing/nav";
 import { NetworkBackground } from "@/components/landing/network-bg";
 import { HeroMockup } from "@/components/landing/hero-mockup";
 import { Wordmark } from "@/components/ui/logo";
-import { getOverviewSnapshot } from "@/lib/stellar";
+import {
+  getOverviewSnapshot,
+  getStablecoinSupplies,
+  getSorobanMetrics,
+} from "@/lib/stellar";
 import { getPriceSnapshot } from "@/lib/stellar/prices";
 import { formatUSD, formatNumber, formatPercent } from "@/lib/utils";
 
@@ -51,33 +55,68 @@ function changeClass(value: number): string {
 }
 
 export default async function Home() {
-  const [snap, prices] = await Promise.all([
+  const [snap, prices, stablecoinSupplies, soroban] = await Promise.all([
     getOverviewSnapshot(),
     getPriceSnapshot(),
+    getStablecoinSupplies(),
+    getSorobanMetrics(),
   ]);
 
   const xlmLabel = `$${prices.xlmUsd.toFixed(4)}`;
   const xlmSourceClass = prices.source === "mock" ? "text-muted" : "text-success";
+  const xlmSourceTag = prices.source === "mock" ? "ILLUSTRATIVE" : prices.source.toUpperCase();
+
+  const stablecoinsVerified =
+    stablecoinSupplies.length > 0 && stablecoinSupplies.every((s) => s.verified);
+  const stablecoinTotal = stablecoinSupplies.reduce((s, x) => s + x.supply, 0);
+  const stablecoinLabel = stablecoinsVerified ? "HORIZON" : "ILLUSTRATIVE";
+  const stablecoinClass = stablecoinsVerified ? "text-success" : "text-muted";
+
+  const sorobanLabel = soroban.verified ? "STELLAR.EXPERT" : "ILLUSTRATIVE";
+  const sorobanClass = soroban.verified ? "text-success" : "text-muted";
 
   const tickerItems: TickerItem[] = [
-    ["XLM", xlmLabel, prices.source.toUpperCase(), xlmSourceClass],
-    ["USDC supply", "$564.2M", "+2.4%", "text-success"],
+    ["XLM", xlmLabel, xlmSourceTag, xlmSourceClass],
+    [
+      "Stablecoin supply",
+      formatUSD(stablecoinTotal),
+      stablecoinLabel,
+      stablecoinClass,
+    ],
     [
       "TVL",
       formatUSD(snap.totalTVL),
-      formatPercent(snap.totalTVLChange, { signed: true }),
-      changeClass(snap.totalTVLChange),
+      snap.verified
+        ? formatPercent(snap.totalTVLChange, { signed: true })
+        : "ILLUSTRATIVE",
+      snap.verified ? changeClass(snap.totalTVLChange) : "text-muted",
     ],
-    ["24h Vol", "$248M", "-1.8%", "text-danger"],
     [
       "RWA",
       formatUSD(snap.rwaMarketSize),
-      formatPercent(snap.rwaChange, { signed: true }),
-      changeClass(snap.rwaChange),
+      snap.verified
+        ? formatPercent(snap.rwaChange, { signed: true })
+        : "ILLUSTRATIVE",
+      snap.verified ? changeClass(snap.rwaChange) : "text-muted",
     ],
-    ["Soroban tx", "412.8K", "+8.4%", "text-success"],
-    ["Contracts", "6,248", "+14.2%", "text-success"],
-    ["Devs", "1,186", "+11.7%", "text-success"],
+    [
+      "Soroban contracts",
+      formatNumber(soroban.contractsDeployed, { compact: false }),
+      sorobanLabel,
+      sorobanClass,
+    ],
+    [
+      "Soroban tx 24h",
+      formatNumber(soroban.transactions24h, { compact: false }),
+      sorobanLabel,
+      sorobanClass,
+    ],
+    [
+      "Active protocols",
+      formatNumber(snap.activeProtocols, { compact: false }),
+      snap.verified ? "DEFILLAMA" : "ILLUSTRATIVE",
+      snap.verified ? "text-success" : "text-muted",
+    ],
   ];
 
   return (
@@ -170,10 +209,10 @@ export default async function Home() {
                       className="mt-1.5 text-[22px] num text-foreground-strong"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
-                      $564.2M
+                      {formatUSD(stablecoinTotal)}
                     </div>
-                    <div className="text-xs text-success num mt-0.5">
-                      +2.4%
+                    <div className={`text-xs num mt-0.5 ${stablecoinsVerified ? "text-muted" : "text-warning"}`}>
+                      {stablecoinsVerified ? "Live · Horizon" : "Illustrative"}
                     </div>
                   </div>
                   <div>
@@ -184,8 +223,8 @@ export default async function Home() {
                     >
                       {formatNumber(snap.activeProtocols, { compact: false })}
                     </div>
-                    <div className="text-xs text-muted num mt-0.5">
-                      {snap.verified ? "Live · DefiLlama" : "Snapshot"}
+                    <div className={`text-xs num mt-0.5 ${snap.verified ? "text-muted" : "text-warning"}`}>
+                      {snap.verified ? "Live · DefiLlama" : "Illustrative"}
                     </div>
                   </div>
                   <div>
@@ -194,10 +233,10 @@ export default async function Home() {
                       className="mt-1.5 text-[22px] num text-foreground-strong"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
-                      6,248
+                      {formatNumber(soroban.contractsDeployed, { compact: false })}
                     </div>
-                    <div className="text-xs text-success num mt-0.5">
-                      +14.2%
+                    <div className={`text-xs num mt-0.5 ${soroban.verified ? "text-muted" : "text-warning"}`}>
+                      {soroban.verified ? "Live · stellar.expert" : "Illustrative"}
                     </div>
                   </div>
                 </div>
@@ -685,7 +724,7 @@ export default async function Home() {
         <div className="border-t border-[var(--color-border)]">
           <div className="mx-auto max-w-7xl px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] text-muted-2 font-mono">
             <div>
-              © 2026 Stellar Pulse · All metrics on this page are illustrative.
+              © 2026 Stellar Pulse · Live data from Horizon · Soroban RPC · stellar.expert · DefiLlama · CoinGecko · Reflector
             </div>
             <div>Built on Stellar · Issue 001 · June 2026</div>
           </div>

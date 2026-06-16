@@ -1,12 +1,15 @@
 [
   {
     "slug": "soroswap",
+    "aliases": [],
     "name": "Soroswap",
+    "category": "DEX",
     "homepage": "https://soroswap.finance",
     "app": "https://app.soroswap.finance",
     "docs": "https://docs.soroswap.finance",
     "twitter": "https://twitter.com/SoroswapFinance",
     "github": "https://github.com/soroswap",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/soroswap?w=48&h=48",
     "audits": [
       {
         "firm": "Runtime Verification",
@@ -14,17 +17,20 @@
         "date": "2024-09-01"
       }
     ],
-    "verifiedOn": "2026-06-15",
+    "verifiedOn": "2026-06-16",
     "verifiedBy": "stellar-pm"
   },
   {
     "slug": "blend",
+    "aliases": ["blend-pools", "blend-pools-v2"],
     "name": "Blend",
+    "category": "Lending",
     "homepage": "https://blend.capital",
     "app": "https://mainnet.blend.capital",
     "docs": "https://docs.blend.capital",
     "twitter": "https://twitter.com/blend_capital",
     "github": "https://github.com/blend-capital",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/blend-pools?w=48&h=48",
     "audits": [
       {
         "firm": "Certora",
@@ -32,50 +38,61 @@
         "date": "2024-04-01"
       }
     ],
-    "verifiedOn": "2026-06-15",
+    "verifiedOn": "2026-06-16",
     "verifiedBy": "stellar-pm"
   },
   {
     "slug": "aquarius",
+    "aliases": ["aquarius-stellar"],
     "name": "Aquarius",
+    "category": "DEX",
     "homepage": "https://aqua.network",
     "app": "https://aqua.network/rewards",
     "docs": "https://aqua.network/docs",
     "twitter": "https://twitter.com/aqua_token",
     "github": "https://github.com/AquaToken",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/aquarius-stellar?w=48&h=48",
     "audits": [],
-    "verifiedOn": "2026-06-15",
+    "verifiedOn": "2026-06-16",
     "verifiedBy": "stellar-pm"
   },
   {
     "slug": "phoenix",
+    "aliases": ["phoenix-defi-hub"],
     "name": "Phoenix DeFi Hub",
+    "category": "DEX",
     "homepage": "https://phoenix-hub.io",
     "app": "https://app.phoenix-hub.io",
     "docs": "https://docs.phoenix-hub.io",
     "twitter": "https://twitter.com/PhoenixDefiHub",
     "github": "https://github.com/Phoenix-Protocol-Group",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/phoenix-defi-hub?w=48&h=48",
     "audits": [],
-    "verifiedOn": "2026-06-15",
+    "verifiedOn": "2026-06-16",
     "verifiedBy": "stellar-pm"
   },
   {
     "slug": "stellarx",
+    "aliases": [],
     "name": "StellarX",
+    "category": "DEX",
     "homepage": "https://www.stellarx.com",
     "docs": "https://www.stellarx.com/about",
     "audits": [],
-    "verifiedOn": "2026-06-15",
+    "verifiedOn": "2026-06-16",
     "verifiedBy": "stellar-pm"
   },
   {
-    "slug": "lumen-bridge",
+    "slug": "allbridge",
+    "aliases": ["lumen-bridge", "allbridge-core"],
     "name": "Allbridge",
+    "category": "Bridge",
     "homepage": "https://allbridge.io",
     "app": "https://core.allbridge.io",
     "docs": "https://docs.allbridge.io",
     "twitter": "https://twitter.com/Allbridge_io",
     "github": "https://github.com/allbridge-io",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/allbridge-core?w=48&h=48",
     "audits": [
       {
         "firm": "Halborn",
@@ -83,7 +100,209 @@
         "date": "2023-11-01"
       }
     ],
-    "verifiedOn": "2026-06-15",
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "defindex",
+    "aliases": [],
+    "name": "DeFindex",
+    "category": "Yield",
+    "homepage": "https://www.defindex.io",
+    "app": "https://app.defindex.io",
+    "docs": "https://docs.defindex.io",
+    "twitter": "https://twitter.com/DeFindexHQ",
+    "github": "https://github.com/paltalabs/defindex",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/defindex?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "stellar-dex",
+    "aliases": [],
+    "name": "Stellar SDEX",
+    "category": "DEX",
+    "homepage": "https://developers.stellar.org/docs/learn/fundamentals/liquidity-on-stellar-sdex-liquidity-pools",
+    "docs": "https://developers.stellar.org/docs/learn/fundamentals/liquidity-on-stellar-sdex-liquidity-pools",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/stellar-dex?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "stellar-amm",
+    "aliases": [],
+    "name": "Stellar AMM",
+    "category": "DEX",
+    "homepage": "https://developers.stellar.org/docs/learn/fundamentals/liquidity-on-stellar-sdex-liquidity-pools",
+    "docs": "https://developers.stellar.org/docs/learn/fundamentals/liquidity-on-stellar-sdex-liquidity-pools",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/stellar-amm?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "sushi-stellar",
+    "aliases": [],
+    "name": "Sushi (Stellar)",
+    "category": "DEX",
+    "homepage": "https://sushi.com",
+    "app": "https://www.sushi.com/swap",
+    "docs": "https://docs.sushi.com",
+    "twitter": "https://twitter.com/SushiSwap",
+    "github": "https://github.com/sushiswap",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/sushi-stellar?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "balanced-exchange",
+    "aliases": [],
+    "name": "Balanced Exchange",
+    "category": "DEX",
+    "homepage": "https://balanced.network",
+    "app": "https://app.balanced.network/trade",
+    "docs": "https://docs.balanced.network",
+    "twitter": "https://twitter.com/BalancedDAO",
+    "github": "https://github.com/balancednetwork",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/balanced-exchange?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "scopuly",
+    "aliases": [],
+    "name": "Scopuly",
+    "category": "DEX",
+    "homepage": "https://scopuly.com",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/scopuly?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "ondo",
+    "aliases": ["ondo-yield-assets"],
+    "name": "Ondo Finance",
+    "category": "RWA",
+    "homepage": "https://ondo.finance",
+    "app": "https://app.ondo.finance",
+    "docs": "https://docs.ondo.finance",
+    "twitter": "https://twitter.com/OndoFinance",
+    "github": "https://github.com/ondoprotocol",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/ondo-yield-assets?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "wisdomtree",
+    "aliases": [],
+    "name": "WisdomTree",
+    "category": "RWA",
+    "homepage": "https://www.wisdomtreeprime.com",
+    "twitter": "https://twitter.com/WisdomTreeFunds",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/wisdomtree?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "etherfuse",
+    "aliases": [],
+    "name": "Etherfuse",
+    "category": "RWA",
+    "homepage": "https://www.etherfuse.com",
+    "twitter": "https://twitter.com/etherfuse",
+    "github": "https://github.com/etherfuse",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/etherfuse?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "spiko",
+    "aliases": [],
+    "name": "Spiko",
+    "category": "RWA",
+    "homepage": "https://www.spiko.io",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/spiko?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "vnx",
+    "aliases": [],
+    "name": "VNX",
+    "category": "RWA",
+    "homepage": "https://vnx.li",
+    "twitter": "https://twitter.com/VNX_platform",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/vnx?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "untangled-rwa",
+    "aliases": [],
+    "name": "Untangled RWA",
+    "category": "RWA",
+    "homepage": "https://untangled.finance",
+    "docs": "https://docs.untangled.finance",
+    "twitter": "https://twitter.com/untangledfin",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/untangled-rwa?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "templar-protocol",
+    "aliases": [],
+    "name": "Templar Protocol",
+    "category": "Lending",
+    "homepage": "https://www.templarfi.org",
+    "twitter": "https://twitter.com/TemplarProtocol",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/templar-protocol?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "upshift",
+    "aliases": [],
+    "name": "Upshift",
+    "category": "Yield",
+    "homepage": "https://app.upshift.finance",
+    "twitter": "https://twitter.com/upshiftfi",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/upshift?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "excellar",
+    "aliases": [],
+    "name": "Excellar",
+    "category": "Derivatives",
+    "homepage": "https://excellar.finance",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/excellar?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "defa-by-invoicemate",
+    "aliases": [],
+    "name": "DeFa by InvoiceMate",
+    "category": "RWA",
+    "homepage": "https://imdefa.com",
+    "logoUrl": "https://icons.llamao.fi/icons/protocols/defa-by-invoicemate?w=48&h=48",
+    "audits": [],
+    "verifiedOn": "2026-06-16",
     "verifiedBy": "stellar-pm"
   }
 ]

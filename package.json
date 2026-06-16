@@ -12,6 +12,7 @@
     "security-check": "vitest run tests/security/security-check.test.ts"
   },
   "dependencies": {
+    "@stellar/stellar-sdk": "^16.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.18.0",

@@ -2,6 +2,8 @@ import { Topbar } from "@/components/dashboard/topbar";
 import { KPI } from "@/components/ui/kpi";
 import { Badge } from "@/components/ui/badge";
 import { SourceBadge } from "@/components/ui/source-badge";
+import { ProtocolLogo } from "@/components/ui/protocol-logo";
+import { ProtocolLink } from "@/components/dashboard/protocol-link";
 import { AreaTrend, DonutChart } from "@/components/dashboard/charts";
 import { capitalFlows, seriesFrom } from "@/lib/mock-data";
 import {
@@ -224,19 +226,11 @@ export default async function OverviewPage() {
                         <td className="px-5 py-3 text-muted-2 num">{i + 1}</td>
                         <td className="px-5 py-3">
                           <div className="flex items-center gap-2.5">
-                            <div
-                              className="size-7 rounded-lg grid place-items-center text-[11px] font-semibold"
-                              style={{
-                                background:
-                                  "linear-gradient(135deg, rgba(0,212,255,0.22), rgba(124,58,237,0.22))",
-                                color: "#29E3FF",
-                              }}
-                            >
-                              {p.name[0]}
-                            </div>
+                            <ProtocolLogo slug={p.slug} name={p.name} size={28} />
                             <div>
-                              <div className="text-foreground-strong font-medium">
+                              <div className="text-foreground-strong font-medium flex items-center gap-1.5">
                                 {p.name}
+                                <ProtocolLink slug={p.slug} />
                               </div>
                               {p.tag && (
                                 <Badge

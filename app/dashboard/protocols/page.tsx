@@ -6,6 +6,7 @@ import { getProtocols } from "@/lib/stellar";
 import { formatUSD, formatNumber, formatPercent, changeTone } from "@/lib/utils";
 import { ArrowDownRight, ArrowUpRight, Search, SlidersHorizontal } from "lucide-react";
 import { ProtocolLink } from "@/components/dashboard/protocol-link";
+import { ProtocolLogo } from "@/components/ui/protocol-logo";
 import { SourceBadge } from "@/components/ui/source-badge";
 import type { Protocol } from "@/lib/types";
 
@@ -93,16 +94,7 @@ export default async function ProtocolsPage() {
                     <td className="px-5 py-3 text-muted-2 num">{i + 1}</td>
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-2.5">
-                        <div
-                          className="size-8 rounded-lg grid place-items-center text-xs font-semibold"
-                          style={{
-                            background:
-                              "linear-gradient(135deg, rgba(0,212,255,0.22), rgba(124,58,237,0.22))",
-                            color: "#29E3FF",
-                          }}
-                        >
-                          {p.name[0]}
-                        </div>
+                        <ProtocolLogo slug={p.slug} name={p.name} size={32} />
                         <div>
                           <div className="text-foreground-strong font-medium flex items-center gap-1.5">
                             {p.name}

@@ -36,7 +36,7 @@ describe("protocol-link registry", () => {
       "aquarius",
       "phoenix",
       "stellarx",
-      "lumen-bridge",
+      "allbridge",
     ]) {
       expect(slugs).toContain(expected);
     }
@@ -46,6 +46,18 @@ describe("protocol-link registry", () => {
     const blend = getLinks("blend");
     expect(blend?.name).toBe("Blend");
     expect(blend?.homepage.startsWith("https://")).toBe(true);
+  });
+
+  it("getLinks resolves a DefiLlama alias to the canonical entry", () => {
+    const aliased = getLinks("blend-pools");
+    expect(aliased?.slug).toBe("blend");
+    const phoenix = getLinks("phoenix-defi-hub");
+    expect(phoenix?.slug).toBe("phoenix");
+  });
+
+  it("legacy slug 'lumen-bridge' still resolves via alias", () => {
+    const legacy = getLinks("lumen-bridge");
+    expect(legacy?.slug).toBe("allbridge");
   });
 
   it("getLinks('nope') returns null", () => {
