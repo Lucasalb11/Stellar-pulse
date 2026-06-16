@@ -159,7 +159,7 @@ export default async function Home() {
               <div className="mt-10 flex flex-wrap items-center gap-6">
                 <Link
                   href="/dashboard"
-                  className="group inline-flex items-center gap-2 text-[14px] text-foreground-strong bg-foreground-strong text-[#0a0f1c] hover:bg-white transition-colors px-5 py-3 rounded-sm font-medium"
+                  className="group inline-flex items-center gap-2 text-[14px] text-[#0a0f1c] bg-foreground-strong hover:bg-white transition-colors px-5 py-3 rounded-sm font-medium"
                 >
                   Open the terminal
                   <ArrowRight className="size-4 group-hover:translate-x-0.5 transition-transform" />
