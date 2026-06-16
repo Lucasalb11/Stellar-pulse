@@ -1,0 +1,89 @@
+[
+  {
+    "slug": "soroswap",
+    "name": "Soroswap",
+    "homepage": "https://soroswap.finance",
+    "app": "https://app.soroswap.finance",
+    "docs": "https://docs.soroswap.finance",
+    "twitter": "https://twitter.com/SoroswapFinance",
+    "github": "https://github.com/soroswap",
+    "audits": [
+      {
+        "firm": "Runtime Verification",
+        "url": "https://github.com/runtimeverification/publications",
+        "date": "2024-09-01"
+      }
+    ],
+    "verifiedOn": "2026-06-15",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "blend",
+    "name": "Blend",
+    "homepage": "https://blend.capital",
+    "app": "https://mainnet.blend.capital",
+    "docs": "https://docs.blend.capital",
+    "twitter": "https://twitter.com/blend_capital",
+    "github": "https://github.com/blend-capital",
+    "audits": [
+      {
+        "firm": "Certora",
+        "url": "https://www.certora.com",
+        "date": "2024-04-01"
+      }
+    ],
+    "verifiedOn": "2026-06-15",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "aquarius",
+    "name": "Aquarius",
+    "homepage": "https://aqua.network",
+    "app": "https://aqua.network/rewards",
+    "docs": "https://aqua.network/docs",
+    "twitter": "https://twitter.com/aqua_token",
+    "github": "https://github.com/AquaToken",
+    "audits": [],
+    "verifiedOn": "2026-06-15",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "phoenix",
+    "name": "Phoenix DeFi Hub",
+    "homepage": "https://phoenix-hub.io",
+    "app": "https://app.phoenix-hub.io",
+    "docs": "https://docs.phoenix-hub.io",
+    "twitter": "https://twitter.com/PhoenixDefiHub",
+    "github": "https://github.com/Phoenix-Protocol-Group",
+    "audits": [],
+    "verifiedOn": "2026-06-15",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "stellarx",
+    "name": "StellarX",
+    "homepage": "https://www.stellarx.com",
+    "docs": "https://www.stellarx.com/about",
+    "audits": [],
+    "verifiedOn": "2026-06-15",
+    "verifiedBy": "stellar-pm"
+  },
+  {
+    "slug": "lumen-bridge",
+    "name": "Allbridge",
+    "homepage": "https://allbridge.io",
+    "app": "https://core.allbridge.io",
+    "docs": "https://docs.allbridge.io",
+    "twitter": "https://twitter.com/Allbridge_io",
+    "github": "https://github.com/allbridge-io",
+    "audits": [
+      {
+        "firm": "Halborn",
+        "url": "https://halborn.com",
+        "date": "2023-11-01"
+      }
+    ],
+    "verifiedOn": "2026-06-15",
+    "verifiedBy": "stellar-pm"
+  }
+]
